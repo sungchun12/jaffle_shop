@@ -67,6 +67,7 @@ if [ $3 == 1 ]; then
           echo "DBNAME: $DBNAME"
           echo "PASSWORD: <hidden>"
 
+          echo "" >> .env
           echo "export HOST=$HOST" >> .env
           echo "export ROLE=$ROLE" >> .env
           echo "export PASSWORD=$PASSWORD" >> .env
