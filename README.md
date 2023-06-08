@@ -25,6 +25,13 @@ The raw data consists of customers, orders, and payments, with the following ent
 - Open a Neon Serverless Postgres Account: here
 - Create a new project
 
+Add the following environment variables to your project `.env` file:
+
+```bash
+export NEON_PROJECT_ID=<project_id>
+export NEON_API_KEY=<api_key>
+```
+
 ```bash
 # run the following commands to setup the project
 brew install jq
