@@ -6,6 +6,7 @@ This is a fork of the original `jaffle_shop` project and designed to get you up 
 
 ### Neon Project Setup & Build
 > Note: Instructions derived from this blog post: [here](https://neon.tech/blog/automating-neon-branch-creation-with-githooks)
+
 - Sign up for a Neon account: [here](https://neon.tech/docs/get-started-with-neon/signing-up)
 - Create your first project: [here](https://neon.tech/docs/get-started-with-neon/setting-up-a-project)
 
