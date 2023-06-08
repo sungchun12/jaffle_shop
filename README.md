@@ -20,7 +20,7 @@ export NEON_API_KEY=<api_key>
 
 How to get `NEON_PROJECT_ID` and `NEON_API_KEY`:
 ![Neon NEON_PROJECT_ID](./media/image-28.jpeg)
-![Neon NEON_API_KEY](./media/giphy.mp4)
+<iframe src="https://giphy.com/embed/fNylARnV0Rv0jzBkDm" width="480" height="268" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/fNylARnV0Rv0jzBkDm">via GIPHY</a></p>
 
 ```bash
 # run the following commands to see everything in action
