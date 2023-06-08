@@ -21,7 +21,7 @@ The raw data consists of customers, orders, and payments, with the following ent
 
 ![Jaffle Shop ERD](/etc/jaffle_shop_erd.png)
 
-### Project Setup
+### Project Setup & Build
 > Note: Instructions derived from this blog post: [here](https://neon.tech/blog/automating-neon-branch-creation-with-githooks)
 - Sign up for a Neon account: [here](https://neon.tech/docs/get-started-with-neon/signing-up)
 - Create your first project: [here](https://neon.tech/docs/get-started-with-neon/setting-up-a-project)
@@ -35,6 +35,10 @@ export NEON_PROJECT_ID=<project_id>
 export NEON_API_KEY=<api_key>
 ```
 
+How to get `NEON_PROJECT_ID` and `NEON_API_KEY`:
+![Neon NEON_PROJECT_ID](./media/image-28.jpeg)
+![Neon NEON_API_KEY](./media/api-key-from-console.mp4)
+
 ```bash
 # run the following commands to see everything in action
 python -m venv venv # create virtual environment
@@ -45,7 +49,7 @@ source venv/bin/activate # activate virtual environment
 brew install jq # parse json to interact with neon api payloads
 cp git_hooks/post-checkout .git/hooks/ # script to create neon branch on git checkout
 git checkout -b custom_branch_$RANDOM # test it out
-source .env # load environment variables
+source .env # load new environment variables
 dbt debug # verify dbt is configured correctly
 dbt build # the part you've been waiting for
 ```
