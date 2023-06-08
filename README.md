@@ -1,6 +1,54 @@
-## Testing dbt project: `jaffle_shop`
+## Testing dbt project: `jaffle_shop_neon`
 
 `jaffle_shop` is a fictional ecommerce store. This dbt project transforms raw data from an app database into a customers and orders model ready for analytics.
+
+This is a fork of the original `jaffle_shop` project and designed to get you up and running with dbt as quickly as possible. It is not intended to be a demonstration of best practices, but rather a self-contained playground for testing out dbt and communicating some of the core dbt concepts with Neon Serverless Postgres and branching.
+
+### Neon Project Setup & Build
+> Note: Instructions derived from this blog post: [here](https://neon.tech/blog/automating-neon-branch-creation-with-githooks)
+- Sign up for a Neon account: [here](https://neon.tech/docs/get-started-with-neon/signing-up)
+- Create your first project: [here](https://neon.tech/docs/get-started-with-neon/setting-up-a-project)
+
+Add the following environment variables to your project `.env` file:
+
+> Checkout [`.env_example`](.env_example) for reference
+
+```bash
+export NEON_PROJECT_ID=<project_id>
+export NEON_API_KEY=<api_key>
+```
+
+How to get `NEON_PROJECT_ID` and `NEON_API_KEY`:
+![Neon NEON_PROJECT_ID](./media/image-28.jpeg)
+![Neon NEON_API_KEY](./media/api-key-from-console.mp4)
+
+```bash
+# run the following commands to see everything in action
+python -m venv venv # create virtual environment
+source venv/bin/activate # activate virtual environment
+pip install --upgrade pip # upgrade pip
+pip install -r requirements.txt # install dbt requirements
+source venv/bin/activate # activate virtual environment
+brew install jq # parse json to interact with neon api payloads
+cp git_hooks/post-checkout .git/hooks/ # script to create neon branch on git checkout
+git checkout -b custom_branch_$RANDOM # test it out
+source .env # load new environment variables
+dbt debug # verify dbt is configured correctly
+dbt build # the part you've been waiting for
+```
+
+You should see the following output to verify neon branching was successful:
+
+```bash
+Switched to a new branch 'custom_branch_861'
+PROJECT_ID: empty-grass-954313
+Do you want to create a Neon branch for custom_branch_861? (y/n): y
+---These are your development profile environment variables---
+HOST: ep-green-tree-388906.us-west-2.aws.neon.tech
+ROLE: sungwonchung3
+DBNAME: neondb
+PASSWORD: <hidden>
+```
 
 ### What is this repo?
 What this repo _is_:
@@ -20,7 +68,6 @@ This repo contains [seeds](https://docs.getdbt.com/docs/building-a-dbt-project/s
 The raw data consists of customers, orders, and payments, with the following entity-relationship diagram:
 
 ![Jaffle Shop ERD](/etc/jaffle_shop_erd.png)
-
 
 ### Running this project
 To get up and running with this project:
