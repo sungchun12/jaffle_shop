@@ -1,27 +1,10 @@
-## Testing dbt project: `jaffle_shop`
+## Testing dbt project: `jaffle_shop_neon`
 
 `jaffle_shop` is a fictional ecommerce store. This dbt project transforms raw data from an app database into a customers and orders model ready for analytics.
 
-### What is this repo?
-What this repo _is_:
-- A self-contained playground dbt project, useful for testing out scripts, and communicating some of the core dbt concepts.
+This is a fork of the original `jaffle_shop` project and designed to get you up and running with dbt as quickly as possible. It is not intended to be a demonstration of best practices, but rather a self-contained playground for testing out dbt and communicating some of the core dbt concepts with Neon Serverless Postgres and branching.
 
-What this repo _is not_:
-- A tutorial — check out the [Getting Started Tutorial](https://docs.getdbt.com/tutorial/setting-up) for that. Notably, this repo contains some anti-patterns to make it self-contained, namely the use of seeds instead of sources.
-- A demonstration of best practices — check out the [dbt Learn Demo](https://github.com/dbt-labs/dbt-learn-demo) repo instead. We want to keep this project as simple as possible. As such, we chose not to implement:
-    - our standard file naming patterns (which make more sense on larger projects, rather than this five-model project)
-    - a pull request flow
-    - CI/CD integrations
-- A demonstration of using dbt for a high-complex project, or a demo of advanced features (e.g. macros, packages, hooks, operations) — we're just trying to keep things simple here!
-
-### What's in this repo?
-This repo contains [seeds](https://docs.getdbt.com/docs/building-a-dbt-project/seeds) that includes some (fake) raw data from a fictional app.
-
-The raw data consists of customers, orders, and payments, with the following entity-relationship diagram:
-
-![Jaffle Shop ERD](/etc/jaffle_shop_erd.png)
-
-### Project Setup & Build
+### Neon Project Setup & Build
 > Note: Instructions derived from this blog post: [here](https://neon.tech/blog/automating-neon-branch-creation-with-githooks)
 - Sign up for a Neon account: [here](https://neon.tech/docs/get-started-with-neon/signing-up)
 - Create your first project: [here](https://neon.tech/docs/get-started-with-neon/setting-up-a-project)
@@ -53,6 +36,38 @@ source .env # load new environment variables
 dbt debug # verify dbt is configured correctly
 dbt build # the part you've been waiting for
 ```
+
+You should see the following output to verify neon branching was successful:
+
+```bash
+Switched to a new branch 'custom_branch_861'
+PROJECT_ID: empty-grass-954313
+Do you want to create a Neon branch for custom_branch_861? (y/n): y
+---These are your development profile environment variables---
+HOST: ep-green-tree-388906.us-west-2.aws.neon.tech
+ROLE: sungwonchung3
+DBNAME: neondb
+PASSWORD: <hidden>
+```
+
+### What is this repo?
+What this repo _is_:
+- A self-contained playground dbt project, useful for testing out scripts, and communicating some of the core dbt concepts.
+
+What this repo _is not_:
+- A tutorial — check out the [Getting Started Tutorial](https://docs.getdbt.com/tutorial/setting-up) for that. Notably, this repo contains some anti-patterns to make it self-contained, namely the use of seeds instead of sources.
+- A demonstration of best practices — check out the [dbt Learn Demo](https://github.com/dbt-labs/dbt-learn-demo) repo instead. We want to keep this project as simple as possible. As such, we chose not to implement:
+    - our standard file naming patterns (which make more sense on larger projects, rather than this five-model project)
+    - a pull request flow
+    - CI/CD integrations
+- A demonstration of using dbt for a high-complex project, or a demo of advanced features (e.g. macros, packages, hooks, operations) — we're just trying to keep things simple here!
+
+### What's in this repo?
+This repo contains [seeds](https://docs.getdbt.com/docs/building-a-dbt-project/seeds) that includes some (fake) raw data from a fictional app.
+
+The raw data consists of customers, orders, and payments, with the following entity-relationship diagram:
+
+![Jaffle Shop ERD](/etc/jaffle_shop_erd.png)
 
 ### Running this project
 To get up and running with this project:
