@@ -20,7 +20,7 @@ export NEON_API_KEY=<api_key>
 
 How to get `NEON_PROJECT_ID` and `NEON_API_KEY`:
 ![Neon NEON_PROJECT_ID](./media/image-28.jpeg)
-![Neon NEON_API_KEY](./media/api-key-from-console.mp4)
+![Neon NEON_API_KEY](./media/giphy.mp4)
 
 ```bash
 # run the following commands to see everything in action
