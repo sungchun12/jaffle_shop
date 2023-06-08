@@ -22,10 +22,13 @@ The raw data consists of customers, orders, and payments, with the following ent
 ![Jaffle Shop ERD](/etc/jaffle_shop_erd.png)
 
 ### Project Setup
-- Open a Neon Serverless Postgres Account: here
-- Create a new project
+> Note: Instructions derived from this blog post: [here](https://neon.tech/blog/automating-neon-branch-creation-with-githooks)
+- Sign up for a Neon account: [here](https://neon.tech/docs/get-started-with-neon/signing-up)
+- Create your first project: [here](https://neon.tech/docs/get-started-with-neon/setting-up-a-project)
 
 Add the following environment variables to your project `.env` file:
+
+> Checkout [`.env_example`](.env_example) for reference
 
 ```bash
 export NEON_PROJECT_ID=<project_id>
@@ -33,10 +36,18 @@ export NEON_API_KEY=<api_key>
 ```
 
 ```bash
-# run the following commands to setup the project
-brew install jq
-cp git_hooks/post-checkout .git/hooks/
-source .env
+# run the following commands to see everything in action
+python -m venv venv # create virtual environment
+source venv/bin/activate # activate virtual environment
+pip install --upgrade pip # upgrade pip
+pip install -r requirements.txt # install dbt requirements
+source venv/bin/activate # activate virtual environment
+brew install jq # parse json to interact with neon api payloads
+cp git_hooks/post-checkout .git/hooks/ # script to create neon branch on git checkout
+git checkout -b custom_branch_$RANDOM # test it out
+source .env # load environment variables
+dbt debug # verify dbt is configured correctly
+dbt build # the part you've been waiting for
 ```
 
 ### Running this project
