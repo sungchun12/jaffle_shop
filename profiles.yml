@@ -5,8 +5,8 @@ jaffle_shop:
       type: postgres
       host: "{{ env_var('HOST') }}"
       # host: ep-shrill-meadow-043325-pooler.us-west-2.aws.neon.tech
-      user: sungwonchung3
-      password: "{{ env_var('SUNG_LABS_PASSWORD') }}"
+      user: "{{ env_var('ROLE') }}"
+      password: "{{ env_var('PASSWORD') }}"
       port: 5432 # The default PostgreSQL port
       dbname: "{{ env_var('DBNAME') }}"
       schema: dbt_sung_dev # Default schema for PostgreSQL

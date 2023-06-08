@@ -24,7 +24,13 @@ The raw data consists of customers, orders, and payments, with the following ent
 ### Project Setup
 - Open a Neon Serverless Postgres Account: here
 - Create a new project
-- `brew install jq`
+
+```bash
+# run the following commands to setup the project
+brew install jq
+cp git_hooks/post-checkout .git/hooks/
+source .env
+```
 
 ### Running this project
 To get up and running with this project:

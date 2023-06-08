@@ -56,8 +56,22 @@ if [ $3 == 1 ]; then
         CONNECTION_URI=$(echo $RESPONSE | jq -r '.connection_uris[0].connection_uri')
 
         if [[ $CONNECTION_URI == postgres://* ]]; then
-          # If it does, write it to the .env file
-          echo "DATABASE_URL=$CONNECTION_URI" >> .env
+          HOST=$(echo $RESPONSE | jq -r '.connection_uris[0].connection_parameters.host')
+          ROLE=$(echo $RESPONSE | jq -r '.connection_uris[0].connection_parameters.role')
+          PASSWORD=$(echo $RESPONSE | jq -r '.connection_uris[0].connection_parameters.password')
+          DBNAME=$(echo $RESPONSE | jq -r '.connection_uris[0].connection_parameters.database')
+
+          echo "---These are your development profile environment variables---"
+          echo "HOST: $HOST"
+          echo "ROLE: $ROLE"
+          echo "DBNAME: $DBNAME"
+          echo "PASSWORD: <hidden>"
+
+          echo "export HOST=$HOST" >> .env
+          echo "export ROLE=$ROLE" >> .env
+          echo "export PASSWORD=$PASSWORD" >> .env
+          echo "export DBNAME=$DBNAME" >> .env
+
         else
           # If it doesn't, print an error message or handle this case as needed
           echo "Invalid connection string."
