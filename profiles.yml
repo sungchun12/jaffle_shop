@@ -1,0 +1,14 @@
+jaffle_shop:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: ep-shrill-meadow-043325-pooler.us-west-2.aws.neon.tech
+      user: sungwonchung3
+      password: "{{ env_var('SUNG_LABS_PASSWORD') }}"
+      port: 5432 # The default PostgreSQL port
+      dbname: neondb
+      schema: public # Default schema for PostgreSQL
+      threads: 1 # Choose the appropriate number
+      connect_timeout: 10 # default 10 seconds
+      sslmode: require
