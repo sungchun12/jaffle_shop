@@ -1,0 +1,69 @@
+#!/bin/bash
+source .env # load the environment variables
+if [ $3 == 0 ]; then exit; fi
+# Check if we just checked out a new branch
+if [ $3 == 1 ]; then
+  BRANCH_NAME=$(git symbolic-ref --short HEAD)
+  NUM_CHECKOUTS=`git reflog --date=local | grep -o ${BRANCH_NAME} | wc -l`
+  if [ ${NUM_CHECKOUTS} -eq 1 ]; then 
+    # Add your own PROJECT_ID and API_KEY
+    PROJECT_ID=$NEON_PROJECT_ID
+    API_KEY=$NEON_API_KEY
+
+    echo "PROJECT_ID: $PROJECT_ID"
+
+    # Get the list of branches
+    BRANCHES_JSON=$(curl --silent --request GET \
+        --url https://console.neon.tech/api/v2/projects/$PROJECT_ID/branches \
+        --header 'accept: application/json' \
+        --header "authorization: Bearer $API_KEY")
+
+    # Check if the branch already exists
+    if echo "$BRANCHES_JSON" | jq -e --arg BRANCH_NAME "$BRANCH_NAME" '.branches[] | select(.name == $BRANCH_NAME)' >/dev/null; then
+
+      echo "Neon branch $BRANCH_NAME already exists."
+      exit
+    fi
+
+    # Prompt the user to ask if they want to create a Neon branch
+    read -p "Do you want to create a Neon branch for $BRANCH_NAME? (y/n): " answer </dev/tty
+
+    # Convert the answer to lowercase to make the condition case-insensitive
+    answer=$(echo $answer | tr '[:upper:]' '[:lower:]')
+
+    if [ "$answer" == "y" ] || [ "$answer" == "yes" ]; then
+
+        # Execute the curl command and save the output
+        RESPONSE=$(curl --silent --request POST \
+            --url https://console.neon.tech/api/v2/projects/$PROJECT_ID/branches \
+            --header 'accept: application/json' \
+            --header "authorization: Bearer $API_KEY" \
+            --header 'content-type: application/json' \
+            --data '
+        {
+            "endpoints": [
+            {
+                "type": "read_write"
+            }
+            ],
+            "branch": {
+            "name": "'"$BRANCH_NAME"'"
+            }
+        }
+        ')
+
+        # Extract the connection_uri from the response
+        CONNECTION_URI=$(echo $RESPONSE | jq -r '.connection_uris[0].connection_uri')
+
+        if [[ $CONNECTION_URI == postgres://* ]]; then
+          # If it does, write it to the .env file
+          echo "DATABASE_URL=$CONNECTION_URI" >> .env
+        else
+          # If it doesn't, print an error message or handle this case as needed
+          echo "Invalid connection string."
+        fi
+    else
+        echo "Skipping Neon branch creation"
+    fi
+  fi
+fi
