@@ -10,7 +10,7 @@ models:
     columns:
       - name: id
         description: This is a unique identifier for a customer
-        data_type: text
+        data_type: integer
         constraints:
           - type: unique
           - type: not_null
