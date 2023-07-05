@@ -13,3 +13,15 @@ jaffle_shop:
       threads: 24 # Choose the appropriate number
       connect_timeout: 10 # default 10 seconds
       sslmode: require
+    prod:
+      type: postgres
+      host: "{{ env_var('HOST') }}"
+      # host: ep-shrill-meadow-043325-pooler.us-west-2.aws.neon.tech
+      user: "{{ env_var('ROLE') }}"
+      password: "{{ env_var('PASSWORD') }}"
+      port: 5432 # The default PostgreSQL port
+      dbname: "{{ env_var('DBNAME') }}"
+      schema: dbt_sung_production # Default schema for PostgreSQL
+      threads: 24 # Choose the appropriate number
+      connect_timeout: 10 # default 10 seconds
+      sslmode: require

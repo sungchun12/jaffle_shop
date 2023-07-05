@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: demo
+    description: demo
+    config:
+      contract:
+        enforced: true
+
+    columns:
+      - name: id
+        description: This is a unique identifier for a customer
+        data_type: text
+        constraints:
+          - type: unique
+          - type: not_null
